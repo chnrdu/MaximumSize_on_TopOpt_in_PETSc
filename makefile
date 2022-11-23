@@ -16,8 +16,7 @@ include ${PETSC_DIR}/lib/petsc/conf/variables
 include ${PETSC_DIR}/lib/petsc/conf/rules
 include ${PETSC_DIR}/lib/petsc/conf/test
 
-topopt: main.cc TopOpt.cc LinearElasticity.cc MMA.cc Filter.cc PDEFilter.cc MPIIO.cc chkopts
-	rm -rf topopt
+topopt: main.cc TopOpt.cc LinearElasticity.cc MMA.cc Filter.cc PDEFilter.cc MPIIO.cc
 	-${CLINKER} -o topopt main.cc TopOpt.cc LinearElasticity.cc MMA.cc Filter.cc PDEFilter.cc MPIIO.cc  ${PETSC_SYS_LIB}
 	${RM}  main.o TopOpt.o LinearElasticity.o MMA.o Filter.o PDEFilter.o MPIIO.o 
 	rm -rf *.o

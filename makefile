@@ -1,8 +1,8 @@
-PETSC_DIR=/home/eduardo/PETSC/3.7.4
-PETSC_ARCH=linux-dbg
-CFLAGS = -I.
+PETSC_DIR=/usr/local/petsc-3.7-mpich
+PETSC_ARCH=linux-gnu-dbg32
+CFLAGS = -I/usr/include/mpich-3.2-x86_64/ -I${PETSC_DIR}/include -I.
 FFLAGS=
-CPPFLAGS=-I.
+CXXFLAGS= -I/usr/include/mpich-3.2-x86_64 -I.
 FPPFLAGS=
 LOCDIR=
 EXAMPLESC=
@@ -11,14 +11,14 @@ MANSEC=
 CLEANFILES=
 NP=
 
-
+# USE /usr/local LIBS
 include ${PETSC_DIR}/lib/petsc/conf/variables
 include ${PETSC_DIR}/lib/petsc/conf/rules
 include ${PETSC_DIR}/lib/petsc/conf/test
 
-topopt: main.o TopOpt.o LinearElasticity.o MMA.o Filter.o PDEFilter.o MPIIO.o chkopts
+topopt: main.cc TopOpt.cc LinearElasticity.cc MMA.cc Filter.cc PDEFilter.cc MPIIO.cc chkopts
 	rm -rf topopt
-	-${CLINKER} -o topopt main.o TopOpt.o LinearElasticity.o MMA.o Filter.o PDEFilter.o MPIIO.o ${PETSC_SYS_LIB}
+	-${CLINKER} -o topopt main.cc TopOpt.cc LinearElasticity.cc MMA.cc Filter.cc PDEFilter.cc MPIIO.cc  ${PETSC_SYS_LIB}
 	${RM}  main.o TopOpt.o LinearElasticity.o MMA.o Filter.o PDEFilter.o MPIIO.o 
 	rm -rf *.o
 
